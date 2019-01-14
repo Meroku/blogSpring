@@ -7,12 +7,33 @@
 </head>
 <body>
 <div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<div>
     <form method="post">
-        <input type="text" placeholder="Введите текст">
-        <input type="text" placeholder="Тэг">
+        <input type="text" name="text" placeholder="Введите текст">
+        <input type="text" name="tag" placeholder="Тэг">
         <button type="submit">Add</button>
+    </form>
+    <form method="post" action="filter">
+        <input type="text" name="filter"/>
+        <button type="submit">Find</button>
     </form>
 </div>
 <div>Список сообщений:</div>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Text</th>
+        <th>Tag</th>
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.id}"></td>
+        <td th:text="${message.text}"></td>
+        <td th:text="${message.tag}"></td>
+    </tr>
+</table>
 </body>
 </html>
