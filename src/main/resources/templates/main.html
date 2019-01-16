@@ -33,6 +33,7 @@
         <td th:text="${message.id}"></td>
         <td th:text="${message.text}"></td>
         <td th:text="${message.tag}"></td>
+        <td><strong th:text="${message.getAuthorName()}"></strong>/td>
     </tr>
 </table>
 </body>
