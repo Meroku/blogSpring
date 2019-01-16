@@ -5,7 +5,7 @@
     <title>Spring Security Example </title>
 </head>
 <body>
-<span th:if="${message != null}" th:text="${message}"></span>
+<span th:if="${message != null}" th:text="${message}">Такой юзер уже существует!</span>
 Add new user:
 <form th:action="@{/registration}" method="post">
     <div><label> User Name : <input type="text" name="username"/> </label></div>

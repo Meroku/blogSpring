@@ -45,16 +45,18 @@ public class MainController {
         return "main";
     }
 
-    @PostMapping("filter")
+    @PostMapping("/filter")
     public String filter(@RequestParam String filter, Model model) {
-        Iterable<Message> messagesByTag;
-        if(filter != null && filter.isEmpty()) {
-            messagesByTag = messageRepo.findByTag(filter);
-        } else {
-            messagesByTag = messageRepo.findAll();
+
+        Iterable<Message> messages;
+        if (filter != null && !filter.isEmpty()) {
+            messages = messageRepo.findByTag(filter);
+        }
+        else {
+            messages = messageRepo.findAll();
         }
 
-        model.addAttribute("messages", messagesByTag);
+        model.addAttribute("messages", messages);
 
         return "main";
     }
