@@ -13,9 +13,10 @@
     <span><a href="/user">User List</a> </span>
 </div>
 <div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="text" name="text" placeholder="Введите текст">
         <input type="text" name="tag" placeholder="Тэг">
+        <input type="file" name="file">
         <button type="submit">Add</button>
     </form>
     <form method="get" action="/main">
@@ -35,6 +36,11 @@
         <td th:text="${message.text}"></td>
         <td th:text="${message.tag}"></td>
         <td><strong th:text="${message.getAuthorName()}"></strong></td>
+        <td>
+            <div th:if="${message.filename != null}">
+                <img width="255" height="165" th:src="@{'/img/' + ${message.filename}}">
+            </div>
+        </td>
         <form method="get" action="/main">
             <td><button name="delete" type="submit" th:value="${message.id}">X</button></td>
         </form>
