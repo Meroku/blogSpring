@@ -10,6 +10,7 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Log Out"/>
     </form>
+    <span><a href="/user">User List</a> </span>
 </div>
 <div>
     <form method="post">
@@ -17,8 +18,8 @@
         <input type="text" name="tag" placeholder="Тэг">
         <button type="submit">Add</button>
     </form>
-    <form method="post" action="filter">
-        <input type="text" name="filter"/>
+    <form method="get" action="/main">
+        <input type="text" name="filter" th:value="${filter}"/>
         <button type="submit">Find</button>
     </form>
 </div>
@@ -33,7 +34,10 @@
         <td th:text="${message.id}"></td>
         <td th:text="${message.text}"></td>
         <td th:text="${message.tag}"></td>
-        <td><strong th:text="${message.getAuthorName()}"></strong>/td>
+        <td><strong th:text="${message.getAuthorName()}"></strong></td>
+        <form method="get" action="/main">
+            <td><button name="delete" type="submit" th:value="${message.id}">X</button></td>
+        </form>
     </tr>
 </table>
 </body>
