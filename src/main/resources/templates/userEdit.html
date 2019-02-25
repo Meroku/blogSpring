@@ -3,9 +3,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>Edit</title>
 </head>
 <body>
+<nav th:insert="parts/navbar.html :: #navbar"></nav>
+<div th:insert="parts/common.html :: #scripts"></div>
+<div class="container mt-5">
 <form action="/user" method="post">
     <input type="text" name="username" th:value="${user.username}">
 
@@ -16,5 +24,6 @@
     <input type="hidden" name="userId" th:value="${user.id}">
     <button type="submit">Save</button>
 </form>
+</div>
 </body>
 </html>

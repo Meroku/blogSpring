@@ -4,47 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Log Out"/>
-    </form>
-    <span><a href="/user">User List</a> </span>
-</div>
-<div>
-    <form method="post" enctype="multipart/form-data">
-        <input type="text" name="text" placeholder="Введите текст">
-        <input type="text" name="tag" placeholder="Тэг">
-        <input type="file" name="file">
-        <button type="submit">Add</button>
-    </form>
-    <form method="get" action="/main">
-        <input type="text" name="filter" th:value="${filter}"/>
-        <button type="submit">Find</button>
-    </form>
-</div>
-<div>Список сообщений:</div>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Text</th>
-        <th>Tag</th>
-    </tr>
-    <tr th:each="message : ${messages}">
-        <td th:text="${message.id}"></td>
-        <td th:text="${message.text}"></td>
-        <td th:text="${message.tag}"></td>
-        <td><strong th:text="${message.getAuthorName()}"></strong></td>
-        <td>
-            <div th:if="${message.filename != null}">
-                <img width="255" height="165" th:src="@{'/img/' + ${message.filename}}">
-            </div>
-        </td>
-        <form method="get" action="/main">
-            <td><button name="delete" type="submit" th:value="${message.id}">X</button></td>
+    <nav th:insert="parts/navbar.html :: #navbar"></nav>
+    <div th:insert="parts/common.html :: #scripts"></div>
+    <div class="container mt-5">
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Log Out"/>
         </form>
-    </tr>
-</table>
+        <span><a href="/user">User List</a> </span>
+    </div>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="text" placeholder="Введите текст">
+            <input type="text" name="tag" placeholder="Тэг">
+            <input type="file" name="file">
+            <button type="submit">Add</button>
+        </form>
+        <form method="get" action="/main">
+            <input type="text" name="filter" th:value="${filter}"/>
+            <button type="submit">Find</button>
+        </form>
+    </div>
+    <div>Список сообщений:</div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Text</th>
+            <th>Tag</th>
+        </tr>
+        <tr th:each="message : ${messages}">
+            <td th:text="${message.id}"></td>
+            <td th:text="${message.text}"></td>
+            <td th:text="${message.tag}"></td>
+            <td><strong th:text="${message.getAuthorName()}"></strong></td>
+            <td>
+                <div th:if="${message.filename != null}">
+                    <img width="255" height="165" th:src="@{'/img/' + ${message.filename}}">
+                </div>
+            </td>
+            <form method="get" action="/main">
+                <td>
+                    <button name="delete" type="submit" th:value="${message.id}">X</button>
+                </td>
+            </form>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

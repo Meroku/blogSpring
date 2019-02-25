@@ -3,21 +3,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>List of users</title>
 </head>
 <body>
-<table>
-    <tr>
-        <th>User Name</th>
-        <th>Role</th>
-        <th>Status</th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.username}"></td>
-        <td th:each="role : ${user.roles}"><p th:text="${role}"></p></td>
-        <td th:text="${user.active}"></td>
-        <td><a th:href="@{'/user/' + ${user.id}}">edit</a></td>
-    </tr>
-</table>
+<nav th:insert="parts/navbar.html :: #navbar"></nav>
+<div th:insert="parts/common.html :: #scripts"></div>
+<div class="container mt-5">
+    <table>
+        <tr>
+            <th>User Name</th>
+            <th>Role</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:each="role : ${user.roles}"><p th:text="${role}"></p></td>
+            <td th:text="${user.active}"></td>
+            <td><a th:href="@{'/user/' + ${user.id}}">edit</a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
